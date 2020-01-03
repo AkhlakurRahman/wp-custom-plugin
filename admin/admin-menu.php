@@ -4,21 +4,23 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-function custom_plugin_callable_admin_menu()
+function custom_plugin_callable_add_new()
 {
-  echo 'Custom Plugin';
+  require_once PLUGIN_DIR_PATH . 'includes/views/add-new.php';
 }
 
-function custom_plugin_callable_admin_sub_menu()
+function custom_plugin_callable_all_pages()
 {
-  echo 'Custom Sub Menu';
+  require_once PLUGIN_DIR_PATH . 'includes/views/all-pages.php';
 }
 
 function custom_plugin_admin_menu()
 {
-  add_menu_page('Custom Plugin', 'Custom Plugin', 'manage_options', 'custom_plugin', 'custom_plugin_callable_admin_menu', 'dashicons-shield-alt');
+  add_menu_page('Custom Plugin', 'Custom Plugin', 'manage_options', 'add_new', 'custom_plugin_callable_add_new', 'dashicons-shield-alt');
 
-  add_submenu_page('custom_plugin', 'Custom Sub Menu', 'Custom Sub Menu', 'manage_options', 'custom_sub_menu', 'custom_plugin_callable_admin_sub_menu');
+  add_submenu_page('add_new', 'Add New', 'Add New', 'manage_options', 'add_new', 'custom_plugin_callable_add_new');
+
+  add_submenu_page('add_new', 'All Pages', 'All Pages', 'manage_options', 'all_pages', 'custom_plugin_callable_all_pages');
 }
 
 add_action('admin_menu', 'custom_plugin_admin_menu');
